@@ -18,7 +18,7 @@ To get started contact AdGyde support - support@adgyde.com
 ---
 
 # Integration Process for AdGyde Unity Android SDK `v3.3.0`
-You can also access the complete documentation from belo link as well
+You can also access the complete documentation from below link as well
 https://www.adgyde.com/documents.php
 
 **NOTE : AdGyde Currently only supports Android in Unity**
@@ -70,10 +70,10 @@ Integrate the downloaded SDK using the below steps
 ### <a id="importaar">
 #### 3.2) Follow below steps to import .aar file into your projects 
  - Open Unity Project and switch platform to Android
- - Click Assets —> Import Package —> Custom Package (Adgyde Unity Package)
+ - Click Assets —> Import Package —> Custom Package (AdGyde Unity Package)
  - Select All files in import window and click import
  - Create an empty game object in Hierarchy tab
- - Add the AdgydeDemo.cs file to the empty game object
+ - Add the AdGydeDemo.cs file to the empty game object
 
 ### <a id="initpagent">
 #### 3.3) Initializing PAgent
