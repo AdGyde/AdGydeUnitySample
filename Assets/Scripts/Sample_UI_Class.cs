@@ -90,7 +90,8 @@ public class Sample_UI_Class : MonoBehaviour
 
         StartCoroutine(CallDelay(45.0f));
     }
-    public void OnMessageRecieved(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
+    
+	public void OnMessageRecieved(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
     {
         Debug.Log("Recieved a new message from : " + e.Message.From);
     }
@@ -99,14 +100,11 @@ public class Sample_UI_Class : MonoBehaviour
     {
         DebugLog.text = "In Init Method";
 
-
-
         AdgydeManager.SharedInstance.CallOnStart();
         // InitialiseFirebase();
-        // StartCoroutine(CallDelay (7.5f));
+        //StartCoroutine(CallDelay (7.5f));
 
         DebugLog.text = "In Init Method After CallDelay";
-
     }
 
     IEnumerator StartDelay(float waitMin)
@@ -127,34 +125,33 @@ public class Sample_UI_Class : MonoBehaviour
 
 
     /*  
-	 * Simple Event
-	 * =============
-	 * The below code is the example to pass a simple event to the AdGyde SDK.
-	 * This event requires only 1 Parameter which is the Event ID.
-	 * 
-	 * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
-	 *
-	 */
+     * Simple Event
+     * =============
+     * The below code is the example to pass a simple event to the AdGyde SDK.
+     * This event requires only 1 Parameter which is the Event ID.
+     * 
+     * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
+     *
+     */
     public void SimpleEvent_Method()
     {
         AdgydeManager.SharedInstance.SimpleEvent("Click_Reward_Ads");
 
         DebugLog.text = "In Simple Event Method";
-
     }
 
 
-   /* 
-    * Counting Event
-    * =============
-    * The below code is the example to pass a Counting event to the AdGyde SDK.
-    * This event is used to get Sub-Category Counting values.
-    * Multiple values Can be passed for getting counted using same parameter.
-    * When user passes multiple values, the console shows the counting of each value seperately
-    * 
-    * NOTE : Creating the Counting Event on Console with Event ID, Parameter is Compulsory
-    *
-    */
+    /* 
+     * Counting Event
+     * =============
+     * The below code is the example to pass a Counting event to the AdGyde SDK.
+     * This event is used to get Sub-Category Counting values.
+     * Multiple values Can be passed for getting counted using same parameter.
+     * When user passes multiple values, the console shows the counting of each value seperately
+     * 
+     * NOTE : Creating the Counting Event on Console with Event ID, Parameter is Compulsory
+     *
+     */
     public void CountingEvent_Method()
     {
 
@@ -199,29 +196,70 @@ public class Sample_UI_Class : MonoBehaviour
     }
 
     /* 
-	 * Unique Event
-	 * =============
-     * The below code is the example to pass a Unique event to the AdGyde SDK.
-	 * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
-	 * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
-	 * 
-	 * NOTE : Creating the Unique Event on Console with Event ID, param is Compulsory
-	 *
-	 */
-    public void UniqueEvent_Method()
+     * Unique Event
+     * =============
+     * Unique Event is useful to track event which needs to be tracked once in a time period.
+     * AdGyde SDK provides Unique Events in three types:- 
+     *        onDailyUnique.
+     *        onPermanentUnique.
+     *        onCustomUnique.
+     * You can implement these unique events as per your need.
+     * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
+     * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
+     * 
+     * 
+     * NOTE : Creating the Unique Event on Console with Event ID, Parameter is Compulsory
+     *
+     */
+
+    public void DailyUnique_Method()
+    {
+        Dictionary<string, string> param = new Dictionary<string, string>();
+        // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
+        // param.put( paramName, valueName );
+        param.Add("DailyUniqueEvent", "DailyUniqueEvent");
+
+        // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
+        AdgydeManager.SharedInstance.DailyUniqueEvent("DailyUniqueEvent", param);
+
+        DebugLog.text = "In Daily Unique Event Method";
+    }
+
+   /*
+    * Permanent Unique event allows you to keep a event unique for user lifetime. 
+    * In case you want to find out how many Unique users clicked on Article page in app lifetime, then you can use this event
+    */
+
+    public void PermanentUnique_Method()
+    {
+        Dictionary<string, string> param = new Dictionary<string, string>();
+        // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
+        // param.put( paramName, valueName );
+        param.Add("PermanentUniqueEvent", "PermanentUniqueEvent");
+
+        // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
+        AdgydeManager.SharedInstance.PermanentUniqueEvent("PermanentUniqueEvent", param);
+
+        DebugLog.text = "In Permanent Event Method";
+    }
+
+   /*
+    * Custom Unique event allows you to keep a event unique for custom time you require. 
+    * In case you want to find out how many Unique users clicked on Article page during last 72 Hours, then you can use this event
+    */
+    public void CustomUnique_Method()
     {
         Dictionary<string, string> param = new Dictionary<string, string>();
         // The param being passed in unique event are in combination of ParamterName and Value same as shown below
         // param.put( paramName, valueName );
-        param.Add("UniqueEvent", "UniqueEvent");
+        param.Add("CustomUniqueEvent", "CustomUniqueEvent");
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
-        // The third Boolean param (true) specifies that the Event is a unique Event
-        // 
-        // NOTE : In case false is passed in third param then this event will work as counting event
-        AdgydeManager.SharedInstance.UniqueEvent("UniqueEvent", param);
+        // The third parameter is time in hours where you need to put the hour.
+        // Track this Custom Unique events on hourly basis. 
+        AdgydeManager.SharedInstance.CustomUniqueEvent("CustomUniqueEvent", param,2);
 
-        DebugLog.text = "In Unique Event Method";
+        DebugLog.text = "In Custom Unique Event Method";
 
     }
 
@@ -244,4 +282,24 @@ public class Sample_UI_Class : MonoBehaviour
 
 
     }
+
+	/* 
+	 * AdGyde demography data provides details of Age and Gender wise segregation of Users.
+	 * This data needs to be passed by Applictaion to show the same in the console
+	 */
+
+	/*
+	 * Age data can be passed to SDK by following functions which are shown in below code:-
+	 *
+	 * Syntax Type 2 :- AdgydeManager.SharedInstance.OnsetAge(Your age);;
+	 *
+	 */	
+
+	public void setAge()
+	{
+		// Revenue Event only requires the Revenue Value to be passed
+		AdgydeManager.SharedInstance.OnsetAge(20);
+	
+		DebugLog.text = "setAge Click";
+	}
 }

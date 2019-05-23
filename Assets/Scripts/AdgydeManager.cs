@@ -66,9 +66,6 @@ public class AdgydeManager : MonoBehaviour
                 //UserID = pluginClass.CallStatic <string> ("getUserId");
                 UserID = pluginClass.GetStatic<string>("utest");
             }
-            else
-            {
-            }
         }
     }
 
@@ -171,7 +168,8 @@ public class AdgydeManager : MonoBehaviour
             }
         }
     }
-    void onUniqueEvent(string eventName, Dictionary<string, string> eventData)
+
+    void onDailyUnique(string eventName, Dictionary<string, string> eventData)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
@@ -183,7 +181,45 @@ public class AdgydeManager : MonoBehaviour
             {
                 using (AndroidJavaObject attrs = ConvertHashMap(eventData))
                 {
-                    pluginClass.CallStatic("onUniqueEvent", eventName, attrs);
+                    pluginClass.CallStatic("onDailyUnique", eventName, attrs);
+                }
+            }
+
+        }
+    }
+
+    void onPermanentUnique(string eventName, Dictionary<string, string> eventData)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                using (AndroidJavaObject attrs = ConvertHashMap(eventData))
+                {
+                    pluginClass.CallStatic("onPermanentUnique", eventName, attrs);
+                }
+            }
+
+        }
+    }
+
+    void onCustomUnique(string eventName, Dictionary<string, string> eventData,int time)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                using (AndroidJavaObject attrs = ConvertHashMap(eventData))
+                {
+                    pluginClass.CallStatic("onCustomUnique", eventName, attrs,time);
                 }
             }
         }
@@ -205,7 +241,7 @@ public class AdgydeManager : MonoBehaviour
                     args[0] = k;
                     args[1] = v;
                     AndroidJNI.CallObjectMethod(obj_HashMap.GetRawObject(),
-                    method_Put, AndroidJNIHelper.CreateJNIArgArray(args));
+                        method_Put, AndroidJNIHelper.CreateJNIArgArray(args));
                 }
             }
         }
@@ -226,6 +262,66 @@ public class AdgydeManager : MonoBehaviour
             }
         }
     }
+
+	void setAge(int year, int month, int day)
+	{
+		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+		{
+			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+		}
+		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
+		{
+			if (pluginClass != null) 
+			{
+				Debug.Log ("Pepper::---if Call------age-------");
+				pluginClass.CallStatic ("setAge", activityContext,year,month,day);
+			} 
+			else 
+			{
+				Debug.Log ("Pepper::---Else Call------age-------");
+			}
+		}
+	}
+
+	void setAge(int age)
+	{
+		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+		{
+			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+		}
+		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
+		{
+			if (pluginClass != null) 
+			{
+				Debug.Log ("Pepper::---if Call------age-------");
+				pluginClass.CallStatic ("setAge", activityContext ,age);
+			} 
+			else 
+			{
+				Debug.Log ("Pepper::---Else Call-------age------");
+			}
+		}
+	}
+
+	void setGender(string i)
+	{
+		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+		{
+			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+		}
+		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
+		{
+			if (pluginClass != null) 
+			{
+				Debug.Log ("Pepper::---if Call-------gender------");
+				pluginClass.CallStatic ("setGender", activityContext ,i);
+			} 
+			else 
+			{
+				Debug.Log ("Pepper::---Else Call-------gender------");
+			}
+		}
+	}
 
     void flush()
     {
@@ -564,26 +660,31 @@ public class AdgydeManager : MonoBehaviour
 
     public void CountingEvent(string EventName, Dictionary<string, string> param)
     {
-        Dictionary<string, string> parameter = new Dictionary<string, string>();
-        parameter.Add("CountingEvent", "CountingEvent");
         onEvent(EventName, param);
         flush();
     }
 
     public void ComputingEvent(string EventName, Dictionary<string, string> param)
-    {
-        Dictionary<string, string> parameter = new Dictionary<string, string>();
-        parameter["ComputingEvent"] = "name";
-        parameter["name"] = "23";
+	{
         onEvent(EventName, param);
         flush();
     }
 
-    public void UniqueEvent(string EventName, Dictionary<string, string> param)
+    public void DailyUniqueEvent(string EventName, Dictionary<string, string> param)
     {
-        Dictionary<string, string> parameter = new Dictionary<string, string>();
-        parameter.Add("UniqueEvent", "UniqueEvent");
-        onUniqueEvent(EventName, param);
+        onDailyUnique(EventName, param);
+        flush();
+    }
+
+    public void PermanentUniqueEvent(string EventName, Dictionary<string, string> param)
+    {
+        onPermanentUnique(EventName, param);
+        flush();
+    }
+
+    public void CustomUniqueEvent(string EventName, Dictionary<string, string> param,int time)
+    {
+        onCustomUnique(EventName, param, 2);
         flush();
     }
 
@@ -591,6 +692,21 @@ public class AdgydeManager : MonoBehaviour
     {
         onEventEnd(EventName);
         flush();
+    }
+
+    public void OnsetAge(int year, int month, int day)
+    {
+        setAge ( year, month, day);
+    }
+
+    public void OnsetAge(int age)
+    {
+        setAge (age);
+    }
+
+    public void OnsetGender(string i)
+    {
+        setGender (i);
     }
 
     public void Flush()

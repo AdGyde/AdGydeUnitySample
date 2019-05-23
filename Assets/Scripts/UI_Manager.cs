@@ -17,26 +17,26 @@ public class UI_Manager : MonoBehaviour
 
     }
 
-    /* 
-	 * Initialize AdGyde SDK with appkey & default channel id "Organic".
-	 * When applictaion is installed from Google Play Store without any campaign the Channel will be Organic as specified in Init    Function
-	 * In case the applictaion is installed through a campaign link then the Default channel will be overriden and value from the campaign link will be passed
-	 */
-	public void Init()
+   /* 
+    * Initialize AdGyde SDK with appkey & default channel id "Organic".
+    * When applictaion is installed from Google Play Store without any campaign the Channel will be Organic as specified in Init    Function
+    * In case the applictaion is installed through a campaign link then the Default channel will be overriden and value from the campaign link will be passed
+    */
+    public void Init()
     {
         AdgydeManager.SharedInstance.Adgyde_Init("Your app key","Organic");
     }
 
 
-	/*  
-	 * Simple Event
-	 * =============
-	 * The below code is the example to pass a simple event to the AdGyde SDK.
-	 * This event requires only 1 Parameter which is the Event ID.
-	 * 
-	 * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
-	 *
-	 */
+   /*  
+    * Simple Event
+    * =============
+    * The below code is the example to pass a simple event to the AdGyde SDK.
+    * This event requires only 1 Parameter which is the Event ID.
+    * 
+    * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
+    *
+    */
     public void SimpleEvent()
     {
         AdgydeManager.SharedInstance.SimpleEvent("Click_Reward_Ads");
@@ -56,7 +56,6 @@ public class UI_Manager : MonoBehaviour
  	 */
     public void CountingEvent()
     {
-
         Dictionary<string, string> parameter = new Dictionary<string, string>();
         // Multiple values can be passed through this event and each value will be counted and displayed in panel seperately
         // Under Counting event -> News event there will be 3 Values - "local", "National", "International" showing 1 count each. 
@@ -64,7 +63,6 @@ public class UI_Manager : MonoBehaviour
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
         AdgydeManager.SharedInstance.CountingEvent("Play-Type", parameter);
-
     }
 
 	/*  
@@ -92,28 +90,71 @@ public class UI_Manager : MonoBehaviour
         AdgydeManager.SharedInstance.CountingEvent("Play-Type", parameter);
     }
 
-	/* 
-	 * Unique Event
-	 * =============
-     * The below code is the example to pass a Unique event to the AdGyde SDK.
-	 * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
-	 * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
-	 * 
-	 * NOTE : Creating the Unique Event on Console with Event ID, param is Compulsory
-	 *
-	 */
-    public void UniqueEvent()
+    /* 
+     * Unique Event
+     * =============
+     * Unique Event is useful to track event which needs to be tracked once in a time period.
+     * AdGyde SDK provides Unique Events in three types:- 
+     *        onDailyUnique.
+     *        onPermanentUnique.
+     *        onCustomUnique.
+     * You can implement these unique events as per your need.
+     * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
+     * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
+     * 
+     * 
+     * NOTE : Creating the Unique Event on Console with Event ID, Parameter is Compulsory
+     *
+     */
+
+    public void DailyUnique()
     {
         Dictionary<string, string> parameter = new Dictionary<string, string>();
-        // The param being passed in unique event are in combination of ParamterName and Value same as shown below
+        // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
         // param.put( paramName, valueName );
-        parameter.Add("UniqueEvent", "UniqueEvent");
+        parameter.Add("DailyUniqueEvent", "DailyUniqueEvent");
+
+        // Event is triggered with EventId and Parameters prepared above, the same are passed in this function        
+        AdgydeManager.SharedInstance.DailyUniqueEvent("onDailyUniqueEvent", parameter);
+    }
+
+   /*
+    * Permanent Unique event allows you to keep a event unique for user lifetime. 
+    * In case you want to find out how many Unique users clicked on Article page in app lifetime, then you can use this event
+    */
+
+    public void PermanentUnique()
+    {
+        Dictionary<string, string> param = new Dictionary<string, string>();
+        // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
+        // param.put( paramName, valueName );
+        param.Add("PermanentUniqueEvent", "PermanentUniqueEvent");
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
-        // The third Boolean param (true) specifies that the Event is a unique Event
-        // 
-        // NOTE : In case false is passed in third param then this event will work as counting event
-        AdgydeManager.SharedInstance.UniqueEvent("UniqueEvent", parameter);
+        AdgydeManager.SharedInstance.PermanentUniqueEvent("PermanentUniqueEvent", param);
+
+        DebugLog.text = "In Permanent Event Method";
+    }
+
+
+   /*
+    * Custom Unique event allows you to keep a event unique for custom time you require. 
+    * In case you want to find out how many Unique users clicked on Article page during last 72 Hours, then you can use this event
+    */
+    public void CustomUnique()
+    {
+        Dictionary<string, string> param = new Dictionary<string, string>();
+        // The param being passed in unique event are in combination of ParamterName and Value same as shown below
+        // param.put( paramName, valueName );
+        param.Add("CustomUniqueEvent", "CustomUniqueEvent");
+
+        // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
+        // The third parameter is time in hours where you need to put the hour.
+        // Track this Custom Unique events on hourly basis. 
+        AdgydeManager.SharedInstance.CustomUniqueEvent("CustomUniqueEvent", param,2);
+
+        DebugLog.text = "In Custom Unique Event Method";
+
     }
 
 	/* 
