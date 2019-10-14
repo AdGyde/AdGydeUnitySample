@@ -21,14 +21,5 @@ To get started contact AdGyde support - support@adgyde.com
 You can also access the complete documentation from below link as well
 <a href="https://www.adgyde.com/documents.php?topic=Integration&platform=unity"> Unity SDK Integration Document </a>
 
-**NOTE : AdGyde Currently only supports Android in Unity**
 
-
-## Table of content
-
-- [Get Your App Key](#getyourkey)
-- [Download Unity Android SDK](#downloadsdk)
-- [Integrate SDK Into Project](#integratesdk)
-   - [3.1 Add library files into your project](#addlibrary)
-   - [3.2 Follow below steps to import .aar file into your projects](#importaar)
 **NOTE : AdGyde Currently only supports Android in Unity**
