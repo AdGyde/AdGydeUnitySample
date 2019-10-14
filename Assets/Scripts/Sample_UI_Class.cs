@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using UnityEngine.UI;
@@ -25,15 +26,20 @@ public class Sample_UI_Class : MonoBehaviour
 
 
     /* 
-	 * Initialize AdGyde SDK with appkey & default channel id "Organic".
-	 * When applictaion is installed from Google Play Store without any campaign the Channel will be Organic as specified in Init    Function
-	 * In case the applictaion is installed through a campaign link then the Default channel will be overriden and value from the campaign link will be passed
-	 */
+  * Initialize AdGyde SDK with appkey & default channel id "Organic".
+  * When applictaion is installed from Google Play Store without any campaign the Channel will be Organic as specified in Init    Function
+  * In case the applictaion is installed through a campaign link then the Default channel will be overriden and value from the campaign link will be passed
+  * You can add your screen name in user flow by passing screen name on "AdgydeManager.SharedInstance.setCurrentScreen("Screen_name")" method.
+  * Call "AdgydeManager.SharedInstance.getDeeplinkDataURl();" enable Deeplinking.
+  *
+ */
     void Awake()
     {
-        AdgydeManager.SharedInstance.Adgyde_Init("Your Appkey", "Organic");
+	AdgydeManager.SharedInstance.Adgyde_Init("Your_App_Key", "Organic");
 
+        AdgydeManager.SharedInstance.setCurrentScreen("Home_Page"); //Custom User Flow
 
+        AdgydeManager.SharedInstance.OnImeiPermission(true);
     }
 
     // Use this for initialization
@@ -74,24 +80,24 @@ public class Sample_UI_Class : MonoBehaviour
     }
 
     /* 
-     * AdGyde's Uninstall Tracking functionality allows you to track the number of uninstalls for your application.
-     * For the uninstall functionality to work AdGyde requires the FCM token.
-     * 
-     * Application can pass the FCM token directly to AdGyde by calling AdGyde's "com.adgyde.android.FIIDService" Service in Manifest file or else
-     *
-     * If application has multiple InstanceIDListener services, then the same can be passed using application's pre-existing Listener 
-     * Just pass the Token to AdGyde's API through the application's pre-existing Listener
-     *
-     * Syntax :- AdgydeManager.SharedInstance.Token = token.Token.ToString();
-     */
+      * AdGyde's Uninstall Tracking functionality allows you to track the number of uninstalls for your application.
+      * For the uninstall functionality to work AdGyde requires the FCM token.
+      * 
+      * Application can pass the FCM token directly to AdGyde by calling AdGyde's "com.adgyde.android.FIIDService" Service in Manifest file or else
+      *
+      * If application has multiple InstanceIDListener services, then the same can be passed using application's pre-existing Listener 
+      * Just pass the Token to AdGyde's API through the application's pre-existing Listener
+      *
+      * Syntax :- AdgydeManager.SharedInstance.Token = token.Token.ToString();
+      */
     public void OnTokenRecieved(object sender, Firebase.Messaging.TokenReceivedEventArgs token)
     {
         AdgydeManager.SharedInstance.Token = token.Token.ToString();
 
         StartCoroutine(CallDelay(45.0f));
     }
-    
-	public void OnMessageRecieved(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
+
+    public void OnMessageRecieved(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
     {
         Debug.Log("Recieved a new message from : " + e.Message.From);
     }
@@ -125,14 +131,14 @@ public class Sample_UI_Class : MonoBehaviour
 
 
     /*  
-     * Simple Event
-     * =============
-     * The below code is the example to pass a simple event to the AdGyde SDK.
-     * This event requires only 1 Parameter which is the Event ID.
-     * 
-     * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
-     *
-     */
+         * Simple Event
+         * =============
+         * The below code is the example to pass a simple event to the AdGyde SDK.
+         * This event requires only 1 Parameter which is the Event ID.
+         * 
+         * NOTE : Creating the Simple Event on Console with Event ID is Compulsory
+         *
+         */
     public void SimpleEvent_Method()
     {
         AdgydeManager.SharedInstance.SimpleEvent("Click_Reward_Ads");
@@ -142,16 +148,16 @@ public class Sample_UI_Class : MonoBehaviour
 
 
     /* 
-     * Counting Event
-     * =============
-     * The below code is the example to pass a Counting event to the AdGyde SDK.
-     * This event is used to get Sub-Category Counting values.
-     * Multiple values Can be passed for getting counted using same parameter.
-     * When user passes multiple values, the console shows the counting of each value seperately
-     * 
-     * NOTE : Creating the Counting Event on Console with Event ID, Parameter is Compulsory
-     *
-     */
+    * Counting Event
+    * =============
+    * The below code is the example to pass a Counting event to the AdGyde SDK.
+    * This event is used to get Sub-Category Counting values.
+    * Multiple values Can be passed for getting counted using same parameter.
+    * When user passes multiple values, the console shows the counting of each value seperately
+    * 
+    * NOTE : Creating the Counting Event on Console with Event ID, Parameter is Compulsory
+    *
+    */
     public void CountingEvent_Method()
     {
 
@@ -196,28 +202,28 @@ public class Sample_UI_Class : MonoBehaviour
     }
 
     /* 
-     * Unique Event
-     * =============
-     * Unique Event is useful to track event which needs to be tracked once in a time period.
-     * AdGyde SDK provides Unique Events in three types:- 
-     *        onDailyUnique.
-     *        onPermanentUnique.
-     *        onCustomUnique.
-     * You can implement these unique events as per your need.
-     * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
-     * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
-     * 
-     * 
-     * NOTE : Creating the Unique Event on Console with Event ID, Parameter is Compulsory
-     *
-     */
+    * Unique Event
+    * =============
+    * Unique Event is useful to track event which needs to be tracked once in a time period.
+    * AdGyde SDK provides Unique Events in three types:- 
+    *        onDailyUnique.
+    *		  onPermanentUnique.
+    *		  onCustomUnique.
+    * You can implement these unique events as per your need.
+    * This event is useful to track event which needs to be tracked once / Uniquely in a Day.
+    * Multiple values Can be passed in the Event using multiple Parameters, but Uniqueness will be as per Event ID only
+    * 
+    * 
+    * NOTE : Creating the Unique Event on Console with Event ID, Parameter is Compulsory
+    *
+    */
 
     public void DailyUnique_Method()
     {
         Dictionary<string, string> param = new Dictionary<string, string>();
         // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
         // param.put( paramName, valueName );
-        param.Add("DailyUniqueEvent", "DailyUniqueEvent");
+		param.Add("DailyUniqueEvent", "DailyUniqueEvent");
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
         AdgydeManager.SharedInstance.DailyUniqueEvent("DailyUniqueEvent", param);
@@ -225,17 +231,19 @@ public class Sample_UI_Class : MonoBehaviour
         DebugLog.text = "In Daily Unique Event Method";
     }
 
-   /*
-    * Permanent Unique event allows you to keep a event unique for user lifetime. 
-    * In case you want to find out how many Unique users clicked on Article page in app lifetime, then you can use this event
-    */
+  /*
+   * Permanent Unique Event
+   * =====================
+   * Permanent Unique event allows you to keep a event unique for user lifetime. 
+   * In case you want to find out how many Unique users clicked on Article page in app lifetime, then you can use this event
+   */
 
     public void PermanentUnique_Method()
     {
         Dictionary<string, string> param = new Dictionary<string, string>();
         // The paramter being passed in unique event are in combination of ParamterName and Value same as shown below
         // param.put( paramName, valueName );
-        param.Add("PermanentUniqueEvent", "PermanentUniqueEvent");
+		param.Add("PermanentUniqueEvent", "PermanentUniqueEvent");
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
         AdgydeManager.SharedInstance.PermanentUniqueEvent("PermanentUniqueEvent", param);
@@ -243,7 +251,8 @@ public class Sample_UI_Class : MonoBehaviour
         DebugLog.text = "In Permanent Event Method";
     }
 
-   /*
+   /* Custom Unique Event
+    * ===================
     * Custom Unique event allows you to keep a event unique for custom time you require. 
     * In case you want to find out how many Unique users clicked on Article page during last 72 Hours, then you can use this event
     */
@@ -256,8 +265,8 @@ public class Sample_UI_Class : MonoBehaviour
 
         // Event is triggered with EventId and Parameters prepared above, the same are passed in this function
         // The third parameter is time in hours where you need to put the hour.
-        // Track this Custom Unique events on hourly basis. 
-        AdgydeManager.SharedInstance.CustomUniqueEvent("CustomUniqueEvent", param,2);
+        // Track this Custom Unique events counts on hourly basis. 
+        AdgydeManager.SharedInstance.CustomUniqueEvent("CustomUniqueEvent", param, 2);
 
         DebugLog.text = "In Custom Unique Event Method";
 
@@ -283,23 +292,55 @@ public class Sample_UI_Class : MonoBehaviour
 
     }
 
-	/* 
-	 * AdGyde demography data provides details of Age and Gender wise segregation of Users.
-	 * This data needs to be passed by Applictaion to show the same in the console
-	 */
+   /* Demogarphy
+    * ========== 
+	* AdGyde demography data provides details of Age and Gender wise segregation of Users.
+    * This data needs to be passed by Applictaion to show the same in the console
+	*/
 
-	/*
-	 * Age data can be passed to SDK by following functions which are shown in below code:-
-	 *
-	 * Syntax Type 2 :- AdgydeManager.SharedInstance.OnsetAge(Your age);;
-	 *
-	 */	
+    /*
+	* Age data can be passed to SDK by following functions which are shown in below code:-
+	*
+	* Syntax Type 2 :- AdgydeManager.SharedInstance.OnsetAge(Your age);;
+	*
+	*/
 
-	public void setAge()
-	{
-		// Revenue Event only requires the Revenue Value to be passed
+    public void setAge()
+    {
+		// Set Age Value in this function
 		AdgydeManager.SharedInstance.OnsetAge(20);
-	
+
 		DebugLog.text = "setAge Click";
-	}
+    }
+
+    /* Gender value can be passed to the SDK using the below function.
+				 * Only the below 3 Values can be passed to the function for Gender
+				 * Male (M)
+				 * Female (F)
+				 * Others (O)
+				 *
+				 * Syntax :-  AdgydeManager.SharedInstance.OnsetGender("M");
+				 * 
+				 */
+
+    public void setGender() 
+    {
+        AdgydeManager.SharedInstance.OnsetGender("M");
+        DebugLog.text = "setGender Click";
+    }
+
+
+    public void UserId() {
+        AdgydeManager.SharedInstance.OnSetUserId("ADG1045984");
+        DebugLog.text = "Set userID";
+    }
+
+
+    /* Deeplinking Data.
+    * If you want deeplinking data then call the below method get the data into String.
+    */
+
+    public void getDeeplinkData() {
+        string Data = AdgydeManager.SharedInstance.getdDldata();
+    }
 }

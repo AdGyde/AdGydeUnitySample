@@ -32,6 +32,8 @@ public class AdgydeManager : MonoBehaviour
     AndroidJavaClass pluginClass;
     AndroidJavaClass pluginEventClass;
 
+    string dlpdata;
+    public string userID;
 
     void Init(string ApiKey, string Channel)
     {
@@ -46,15 +48,13 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("init", activityContext, ApiKey, Channel);
             }
-
         }
     }
 
-    public string UserID;
-
     public void getUserID()
     {
-        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))   {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
             activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
         }
         using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
@@ -64,8 +64,26 @@ public class AdgydeManager : MonoBehaviour
             if (pluginClass != null)
             {
                 //UserID = pluginClass.CallStatic <string> ("getUserId");
-                UserID = pluginClass.GetStatic<string>("utest");
+                userID = pluginClass.GetStatic<string>("utest");
             }
+        }
+    }
+
+    public String getdDldata()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            Sample_UI_Class.SharedInstance.DebugLog.text = "UNITY :: result";
+            if (pluginClass != null)
+            {
+              dlpdata = pluginClass.CallStatic <string> ("getDeeplinkUri",activityContext);
+            }
+            return dlpdata;
         }
     }
 
@@ -86,7 +104,7 @@ public class AdgydeManager : MonoBehaviour
     void uploadTokenforRegisteration()
     {
         UserDetails _currentUser = new UserDetails();
-        _currentUser.user = UserID;
+        _currentUser.user = userID;
         _currentUser.token = Token;
         _currentUser.appkey = Fcm_Adgyde_AppKey;
 
@@ -135,8 +153,12 @@ public class AdgydeManager : MonoBehaviour
             }
         }
     }
+    void Start()
+    {
+        getDeeplinkDataURl();
+    }
 
-    void onEvent(string eventName, Dictionary<string, string> eventData)
+        void onEvent(string eventName, Dictionary<string, string> eventData)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
@@ -207,7 +229,7 @@ public class AdgydeManager : MonoBehaviour
         }
     }
 
-    void onCustomUnique(string eventName, Dictionary<string, string> eventData,int time)
+    void onCustomUnique(string eventName, Dictionary<string, string> eventData, long time)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
@@ -219,7 +241,7 @@ public class AdgydeManager : MonoBehaviour
             {
                 using (AndroidJavaObject attrs = ConvertHashMap(eventData))
                 {
-                    pluginClass.CallStatic("onCustomUnique", eventName, attrs,time);
+                    pluginClass.CallStatic("onCustomUnique", eventName, attrs, time);
                 }
             }
         }
@@ -263,65 +285,96 @@ public class AdgydeManager : MonoBehaviour
         }
     }
 
-	void setAge(int year, int month, int day)
-	{
-		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-		{
-			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
-		}
-		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
-		{
-			if (pluginClass != null) 
-			{
-				Debug.Log ("Pepper::---if Call------age-------");
-				pluginClass.CallStatic ("setAge", activityContext,year,month,day);
-			} 
-			else 
-			{
-				Debug.Log ("Pepper::---Else Call------age-------");
-			}
-		}
-	}
+    void setAge(int year, int month, int day)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                Debug.Log("Pepper::---if Call------age-------");
+                pluginClass.CallStatic("setAge", activityContext, year, month, day);
+            }
+            else
+            {
+                Debug.Log("Pepper::---Else Call------age-------");
+            }
+        }
+    }
 
-	void setAge(int age)
-	{
-		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-		{
-			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
-		}
-		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
-		{
-			if (pluginClass != null) 
-			{
-				Debug.Log ("Pepper::---if Call------age-------");
-				pluginClass.CallStatic ("setAge", activityContext ,age);
-			} 
-			else 
-			{
-				Debug.Log ("Pepper::---Else Call-------age------");
-			}
-		}
-	}
+    void setAge(int age)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                Debug.Log("Pepper::---if Call------age-------");
+                pluginClass.CallStatic("setAge", activityContext, age);
+            }
+            else
+            {
+                Debug.Log("Pepper::---Else Call-------age------");
+            }
+        }
+    }
 
-	void setGender(string i)
-	{
-		using(activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-		{
-			activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
-		}
-		using(pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent")) 
-		{
-			if (pluginClass != null) 
-			{
-				Debug.Log ("Pepper::---if Call-------gender------");
-				pluginClass.CallStatic ("setGender", activityContext ,i);
-			} 
-			else 
-			{
-				Debug.Log ("Pepper::---Else Call-------gender------");
-			}
-		}
-	}
+    void setGender(string i)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                Debug.Log("Pepper::---if Call-------gender------");
+                pluginClass.CallStatic("setGender", activityContext, i);
+            }
+            else
+            {
+                Debug.Log("Pepper::---Else Call-------gender------");
+            }
+        }
+    }
+
+    public void onSetCurrentScreen(String scr)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("setCurrentScreen", activityContext, scr);
+            }
+        }
+    }
+
+    public void onRemoveCurrentScreen(String scr)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("removeCurrentScreen", activityContext, scr);
+            }
+        }
+    }
+
 
     void flush()
     {
@@ -353,15 +406,66 @@ public class AdgydeManager : MonoBehaviour
         }
     }
 
-    void onDeepLink()
+    void setUserId(string id) 
+	{
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("setClientUserId", id);
+            }
+        }
+    }
+
+
+    void onAllowImeiPermission(Boolean value)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("allowPermissionIMEI", activityContext, value);
+            }
+        }
+
+    }
+
+    void onDeepLink(String pkgname, String classname, String dataurl)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("getDeeplinking", activityContext, pkgname, classname, dataurl);
+            }
+        }
+    }
+
+    void onDeferredDeeplink() {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+
         using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
         {
             Debug.Log("UNITY :: onDeepLink 2222 ");
             if (pluginClass != null)
             {
-                pluginClass.CallStatic("onDeepLink", activityContext);
+                pluginClass.CallStatic("deferredDeepLink", activityContext);
             }
         }
     }
@@ -603,14 +707,10 @@ public class AdgydeManager : MonoBehaviour
 
     void Awake()
     {
-
+        getDeeplinkDataURl();
     }
 
-    void Start()
-    {
-    }
-
-
+    
 
     /* 
     * Initialize AdGyde SDK with appkey & default channel id "Organic".
@@ -624,12 +724,11 @@ public class AdgydeManager : MonoBehaviour
         setDebugEnabled(true);
         Fcm_Adgyde_AppKey = AdGyde_AppKey;
         CallOnCreate();
-        //UnityIntent ();
     }
 
     void UnityIntent()
     {
-      
+
 
         AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
@@ -642,7 +741,7 @@ public class AdgydeManager : MonoBehaviour
         {
             try
             {
-                onDeepLink();
+                onDeepLink("", "", "");
 
             }
             catch (Exception e)
@@ -655,58 +754,70 @@ public class AdgydeManager : MonoBehaviour
     public void SimpleEvent(string EventName)
     {
         onEvent(EventName);
-        flush();
+       
     }
-
+  
     public void CountingEvent(string EventName, Dictionary<string, string> param)
     {
         onEvent(EventName, param);
-        flush();
+        
     }
 
     public void ComputingEvent(string EventName, Dictionary<string, string> param)
-	{
+    {
         onEvent(EventName, param);
-        flush();
+        
     }
 
     public void DailyUniqueEvent(string EventName, Dictionary<string, string> param)
     {
         onDailyUnique(EventName, param);
-        flush();
+        
     }
 
     public void PermanentUniqueEvent(string EventName, Dictionary<string, string> param)
     {
         onPermanentUnique(EventName, param);
-        flush();
+        
     }
 
-    public void CustomUniqueEvent(string EventName, Dictionary<string, string> param,int time)
+    public void CustomUniqueEvent(string EventName, Dictionary<string, string> param, int time)
     {
-        onCustomUnique(EventName, param, 2);
-        flush();
+        onCustomUnique(EventName, param, time);
+        
     }
-
     public void EventEnd(string EventName)
     {
         onEventEnd(EventName);
-        flush();
+        
     }
 
     public void OnsetAge(int year, int month, int day)
     {
-        setAge ( year, month, day);
+        setAge(year, month, day);
     }
 
     public void OnsetAge(int age)
     {
-        setAge (age);
+        setAge(age);
     }
 
     public void OnsetGender(string i)
     {
-        setGender (i);
+        setGender(i);
+        
+    }
+
+    public void setCurrentScreen(String scr)
+    {
+        onSetCurrentScreen(scr);
+
+    }
+
+    public void removeCurrentScreen(String removescr)
+    {
+        onRemoveCurrentScreen(removescr);
+      
     }
 
     public void Flush()
@@ -717,13 +828,21 @@ public class AdgydeManager : MonoBehaviour
     public void OnRevenue(int Amount)
     {
         onRevenue(Amount);
-        flush();
     }
 
-    public void DeepLinking()
+    public void OnSetUserId(string id) 
+	{
+        setUserId(id);
+    }
+
+    public void OnImeiPermission(Boolean value) 
+	{
+        onAllowImeiPermission(value);
+    }
+
+    public void getDeeplinkDataURl()
     {
-        onDeepLink();
-        flush();
+        getdDldata();
     }
 
     public void AdgydeToken()
