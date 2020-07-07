@@ -423,6 +423,37 @@ public class AdgydeManager : MonoBehaviour
     }
 
 
+    void setPhoneNumber(string phonenumber)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("setPhoneno", activityContext, phonenumber);
+            }
+        }
+    }
+
+    void setEmailId(string emailId)
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            if (pluginClass != null)
+            {
+                pluginClass.CallStatic("setEmail", activityContext, emailId);
+            }
+        }
+    }
+
+
     void onAllowImeiPermission(Boolean value)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
@@ -817,6 +848,20 @@ public class AdgydeManager : MonoBehaviour
     public void removeCurrentScreen(String removescr)
     {
         onRemoveCurrentScreen(removescr);
+
+    }
+
+    public void setemailId(String emailId)
+    {
+        setEmailId(emailId);
+
+    }
+
+
+
+    public void setphoneNumber(String phonenumber)
+    {
+        setPhoneNumber(phonenumber);
 
     }
 

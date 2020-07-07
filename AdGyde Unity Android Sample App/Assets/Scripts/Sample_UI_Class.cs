@@ -341,6 +341,18 @@ public class Sample_UI_Class : MonoBehaviour
         DebugLog.text = "Set userID";
     }
 
+    public void setEmailId()
+    {
+        AdgydeManager.SharedInstance.setemailId("support@adgyde.com");
+        DebugLog.text = "Set Email Id";
+    }
+
+
+    public void setPhoneNumber()
+    {
+        AdgydeManager.SharedInstance.setphoneNumber("9130300030");
+        DebugLog.text = "Set Phone Number";
+    }
 
     /* Deeplinking Data.
         * If you want deeplinking data then call the below method get the data into String.

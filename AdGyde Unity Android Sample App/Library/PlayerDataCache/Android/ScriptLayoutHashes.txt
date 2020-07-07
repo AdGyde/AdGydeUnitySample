@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-D:/Sanu/chandan sir/Unity_4.0.2_23_05/Adgyde_Unity_4.0.2/Demo.apk
+D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/NewDemo2.apk
 SceneListBegin?
 Assets/Scenes/Demo.unity
 SceneListEnd?
@@ -118,7 +118,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-3c6d0250d449bbd5ebd6be203d8196e3 Assembly-CSharp.dll:.AdgydeManager
+9fcb028ee7166f75e0bb2197e667d799 Assembly-CSharp.dll:.AdgydeManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer

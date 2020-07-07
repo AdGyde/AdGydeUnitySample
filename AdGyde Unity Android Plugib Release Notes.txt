@@ -4,6 +4,14 @@
 ============================================================================
 ============================================================================
 
+
+v4.1.5 - (16 Mar 2020)
+=======================
+1) Minor Bug Fixes
+2) Function to pass email for better user correlation
+3) Function to pass phone number for better user correlation
+4) Support for FCM version 19+ has been added
+
 v4.1.2.1 - (20 Jan 2020)
 ========================
 1) Minor Bug Fixes

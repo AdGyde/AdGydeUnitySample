@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A5AB59ED-ADB5-71BE-4422-A23247882AE6}</ProjectGuid>
+    <ProjectGuid>{CE35C1AD-7004-66E6-D7F2-AA4AF571E087}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -71,19 +71,19 @@
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-messaging-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -284,37 +284,37 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Analytics">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.App">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Auth">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Messaging">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Platform">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Parse/Plugins/Unity.Compat.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Parse/Plugins/Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Tasks">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/Sanu/chandan sir/Unity_4.0.2_23_05/AdGydeUnity_v4.1.2.1_03/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>D:/Sanu/Example Builds Backup/Unity_Example/AdGydeUnitySampleApp_4.1.5/AdGyde Unity Android Sample App/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
