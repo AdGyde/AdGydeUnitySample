@@ -35,7 +35,14 @@ public class AdgydeManager : MonoBehaviour
     string dlpdata;
     public string userID;
     public string Token;
-
+    public string utmsource;
+    public string utmmediasource;
+    public string campname;
+    public string campid;
+    public string channelname;	
+    public string channelid;
+	
+	
     void Init(string ApiKey, string Channel)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
@@ -64,8 +71,8 @@ public class AdgydeManager : MonoBehaviour
             Sample_UI_Class.SharedInstance.DebugLog.text = "UNITY :: result";
             if (pluginClass != null)
             {
-                //UserID = pluginClass.CallStatic <string> ("getUserId");
-                userID = pluginClass.GetStatic<string>("utest");
+                userID = pluginClass.CallStatic <string> ("getUserId");
+                //userID = pluginClass.GetStatic<string>("utest");
             }
         }
     }
@@ -296,12 +303,12 @@ public class AdgydeManager : MonoBehaviour
         {
             if (pluginClass != null)
             {
-                Debug.Log("Pepper::---if Call------age-------");
+                Debug.Log("Pepper:: if Call, Setage");
                 pluginClass.CallStatic("setAge", activityContext, year, month, day);
             }
             else
             {
-                Debug.Log("Pepper::---Else Call------age-------");
+                Debug.Log("Pepper:: Else Call, Setage");
             }
         }
     }
@@ -316,12 +323,12 @@ public class AdgydeManager : MonoBehaviour
         {
             if (pluginClass != null)
             {
-                Debug.Log("Pepper::---if Call------age-------");
+                Debug.Log("Pepper:: If Call, Setage");
                 pluginClass.CallStatic("setAge", activityContext, age);
             }
             else
             {
-                Debug.Log("Pepper::---Else Call-------age------");
+                Debug.Log("Pepper:: Else Call, Setage");
             }
         }
     }
@@ -336,12 +343,12 @@ public class AdgydeManager : MonoBehaviour
         {
             if (pluginClass != null)
             {
-                Debug.Log("Pepper::---if Call-------gender------");
+                Debug.Log("Pepper:: if Call, setGender");
                 pluginClass.CallStatic("setGender", activityContext, i);
             }
             else
             {
-                Debug.Log("Pepper::---Else Call-------gender------");
+                Debug.Log("Pepper:: Else Call, setGender");
             }
         }
     }
@@ -454,6 +461,115 @@ public class AdgydeManager : MonoBehaviour
     }
 
 
+
+    public void getUtmSource()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                utmsource = pluginClass.CallStatic<string>("getUtmSource");
+                Debug.Log("utm source = " + utmsource);
+                Debug.Log("Pepper, utmsource = " + utmsource);
+            }
+        }
+    }
+
+    public void getMediaSource()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                utmmediasource = pluginClass.CallStatic<string>("getMediaSource");
+                Debug.Log("mediasource = " + utmmediasource);
+                Debug.Log("Pepper, mediasource = " + utmmediasource);
+            }
+        }
+    }
+
+    public void getCampaignName()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                campname = pluginClass.CallStatic<string>("getCampaignName");
+                Debug.Log("campname = " + campname);
+                Debug.Log("Pepper, campname = " + campname);
+            }
+        }
+    }
+
+    public void getCampaignId()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                campid = pluginClass.CallStatic<string>("getCampaignId");
+                Debug.Log("campid = " + campid);
+                Debug.Log("Pepper, campid = " + campid);
+            }
+        }
+    }
+
+    public void getChannelName()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                channelname = pluginClass.CallStatic<string>("getChannelName");
+                Debug.Log("channel name = " + channelname);
+                Debug.Log("Pepper, channel name = " + channelname);
+            }
+        }
+    }
+
+    public void getChannelId()
+    {
+        using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
+        {
+            Debug.Log("UNITY :: result ");
+            if (pluginClass != null)
+            {
+                channelid = pluginClass.CallStatic<string>("getChannelId");
+                Debug.Log("channel name = " + channelid);
+                Debug.Log("Pepper, channel name = " + channelid);
+            }
+        }
+    }
+
     void onAllowImeiPermission(Boolean value)
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
@@ -514,7 +630,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("onTokenRefresh", token);
             }
-
         }
     }
 
@@ -530,7 +645,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callFcmService");
             }
-
         }
     }
 
@@ -546,7 +660,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("setDebugEnabled", enabled);
             }
-
         }
     }
 
@@ -562,7 +675,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("setReportLocationEnabled", enabled);
             }
-
         }
     }
 
@@ -578,7 +690,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("setLocation", lng, lat);
             }
-
         }
     }
 
@@ -594,7 +705,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("setSessionTimeout", seconds);
             }
-
         }
     }
 
@@ -610,7 +720,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callOnStop", activityContext);
             }
-
         }
     }
 
@@ -618,20 +727,14 @@ public class AdgydeManager : MonoBehaviour
     {
         using (activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
-
             activityContext = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
-
         }
         using (pluginClass = new AndroidJavaClass("com.adgyde.android.PAgent"))
         {
-
             if (pluginClass != null)
             {
-
                 pluginClass.CallStatic("callOnStart", activityContext);
-
             }
-
         }
     }
 
@@ -647,7 +750,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callOnResume", activityContext);
             }
-
         }
     }
 
@@ -663,7 +765,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callOnPause", activityContext);
             }
-
         }
     }
 
@@ -679,7 +780,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callOnDestroy", activityContext);
             }
-
         }
     }
 
@@ -695,7 +795,6 @@ public class AdgydeManager : MonoBehaviour
             {
                 pluginClass.CallStatic("callOnCreate", activityContext);
             }
-
         }
     }
 
@@ -714,6 +813,7 @@ public class AdgydeManager : MonoBehaviour
         CallOnStop();
         Application.Quit();
     }
+
     IEnumerator CallDelay(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -742,8 +842,6 @@ public class AdgydeManager : MonoBehaviour
         getDeeplinkDataURl();
     }
 
-
-
     /* 
     * Initialize AdGyde SDK with appkey & default channel id "Organic".
     * When applictaion is installed from Google Play Store without any campaign the Channel will be Organic as specified in Init    Function
@@ -760,8 +858,6 @@ public class AdgydeManager : MonoBehaviour
 
     void UnityIntent()
     {
-
-
         AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         AndroidJavaObject intent = currentActivity.Call<AndroidJavaObject>("getIntent");
@@ -774,7 +870,6 @@ public class AdgydeManager : MonoBehaviour
             try
             {
                 onDeepLink("", "", "");
-
             }
             catch (Exception e)
             {
@@ -791,36 +886,31 @@ public class AdgydeManager : MonoBehaviour
     public void CountingEvent(string EventName, Dictionary<string, string> param)
     {
         onEvent(EventName, param);
-
     }
 
     public void ComputingEvent(string EventName, Dictionary<string, string> param)
     {
         onEvent(EventName, param);
-
     }
 
     public void DailyUniqueEvent(string EventName, Dictionary<string, string> param)
     {
         onDailyUnique(EventName, param);
-
     }
 
     public void PermanentUniqueEvent(string EventName, Dictionary<string, string> param)
     {
         onPermanentUnique(EventName, param);
-
     }
 
     public void CustomUniqueEvent(string EventName, Dictionary<string, string> param, int time)
     {
         onCustomUnique(EventName, param, time);
-
     }
+	
     public void EventEnd(string EventName)
     {
         onEventEnd(EventName);
-
     }
 
     public void OnsetAge(int year, int month, int day)
@@ -836,33 +926,26 @@ public class AdgydeManager : MonoBehaviour
     public void OnsetGender(string i)
     {
         setGender(i);
-
     }
 
     public void setCurrentScreen(String scr)
     {
         onSetCurrentScreen(scr);
-
     }
 
     public void removeCurrentScreen(String removescr)
     {
         onRemoveCurrentScreen(removescr);
-
     }
 
     public void setemailId(String emailId)
     {
         setEmailId(emailId);
-
     }
-
-
 
     public void setphoneNumber(String phonenumber)
     {
         setPhoneNumber(phonenumber);
-
     }
 
     public void Flush()
@@ -878,6 +961,36 @@ public class AdgydeManager : MonoBehaviour
     public void OnSetUserId(string id)
     {
         setUserId(id);
+    }
+
+    public void OngetUtmSource()
+    {
+        getUtmSource();
+    }
+	
+    public void OngetMediaSource()
+    {
+        getMediaSource();
+    }
+	
+    public void OngetCampaignName()
+    {
+        getCampaignName();
+    }
+	
+    public void OngetCampaignId()
+    {
+        getCampaignId();
+    }
+	
+    public void OngetChannelName()
+    {
+        getChannelName();
+    }
+	
+    public void OngetChannelId()
+    {
+        getChannelId();
     }
 
     public void OnImeiPermission(Boolean value)
@@ -896,7 +1009,6 @@ public class AdgydeManager : MonoBehaviour
         // Used to upload the user Token to server
         onTokenRefresh(token);
         Debug.Log("USER DATA UPLOAD");
-      
     }
 
     public void callAdGydeFcmService()
@@ -921,8 +1033,7 @@ public class AdgydeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        getUserID();
-      
+        getUserID();      
     }
     public void OnMessageRecieved(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
     {

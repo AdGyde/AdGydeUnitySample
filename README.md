@@ -1,6 +1,6 @@
 
 
-<img src="https://www.adgyde.com/img/logo.png"  width="75">
+<img src="https://www.adgyde.com/source/images/icons/logo.png"  width="75">
 
 
 # AdGyde - Unity Android Integration
@@ -17,7 +17,7 @@ AdGyde through its attribution SDK can determine which channel / partner the app
 To get started contact AdGyde support - support@adgyde.com
 ---
 
-# Integration Process for AdGyde Unity Android SDK `v4.1.5`
+# Integration Process for AdGyde Unity Android SDK `v4.1.11`
 You can also access the complete documentation from below link as well
 <a href="https://www.adgyde.com/documents/sdk_integration_process?platform=integration&type=unity"> Unity SDK Integration Document </a>
 
